@@ -12,6 +12,7 @@ static void UnprotectModule(HMODULE moduleHandle)
 	DWORD s_OldProtect;
 	VirtualProtect((LPVOID)moduleHandle, s_ImageSize, PAGE_EXECUTE_READWRITE, &s_OldProtect);
 }
+
 static bool HookJmpTrampoline(intptr_t targetToHook, void* ourFunction, int overrideLenght)
 {
 	if (overrideLenght < 9)
@@ -29,5 +30,16 @@ static bool HookJmpTrampoline(intptr_t targetToHook, void* ourFunction, int over
 
 	DWORD temp;
 	VirtualProtect((void*)targetToHook, overrideLenght, curProtectionFlag, &temp);
+	return true;
+}
+
+static bool NopRegion(intptr_t address, int lenght)
+{
+	DWORD curProtectionFlag;
+	VirtualProtect((void*)address, lenght, PAGE_EXECUTE_READWRITE, &curProtectionFlag);
+	memset((void*)address, 0x90, lenght);
+
+	DWORD temp;
+	VirtualProtect((void*)address, lenght, curProtectionFlag, &temp);
 	return true;
 }

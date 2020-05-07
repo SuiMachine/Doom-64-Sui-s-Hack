@@ -42,14 +42,6 @@ BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID)
 
 		}
 
-
-
-
-
-
-
-
-
 	}
 	else if (reason == DLL_PROCESS_DETACH) {
 	}
