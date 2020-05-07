@@ -135,11 +135,24 @@ void handleInput2()
 						{
 							int normalizedRotationY = normalizeInput(convertValueForNormalization(inputYAxis));
 
-
+							//unlike X rotation, Y rotation needs to be clamped, so have to read the value and compare it against limits
+							auto currentOrientationY = *(int*)(v3 + 0x6C);
 							if (inputYAxis < 0.0f)
-								*(DWORD*)(v3 + 0x6C) += normalizedRotationY;    // Turn Left
+							{
+								auto newYOrientation = currentOrientationY + normalizedRotationY;
+								if (1104062110 < (currentOrientationY + normalizedRotationY))
+									*(int*)(v3 + 0x6C) = 1104062110;
+								else
+									*(int*)(v3 + 0x6C) = newYOrientation;
+							}
 							else
-								*(DWORD*)(v3 + 0x6C) -= normalizedRotationY;    // Turn right
+							{
+								auto newYOrientation = currentOrientationY - normalizedRotationY;
+								if(-1071386491 > newYOrientation)
+									*(int*)(v3 + 0x6C) = -1071386491;
+								else
+									*(int*)(v3 + 0x6C) = newYOrientation;
+							}
 						}
 					}
 					*(DWORD*)(v2 + 108) = 1;
