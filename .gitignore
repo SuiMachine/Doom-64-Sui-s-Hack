@@ -14,7 +14,6 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
 
 # Fortran module files
 *.mod
@@ -30,3 +29,10 @@
 *.exe
 *.out
 *.app
+
+# VS junk
+.vs/*
+Doom64Hack/.vs
+Doom64Hack/x64/*
+x64/*
+
