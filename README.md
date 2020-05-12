@@ -13,4 +13,4 @@ Stuff that would be nice to fix in this crappy port:
 Other:
 -------
 * Uses [ThirteenAG's Ultimate ASI Loader](https://github.com/ThirteenAG/Ultimate-ASI-Loader).
-* Thanks to **Seamus** and **Url** for being utter idiots, who have no clue what they are talking about, who's gibberish made me motivated to reverse parts of code and write this.
+* Thanks to **Seamus** and **Url** having absolutely no clue what they are talking about on Steam forums (all the time), whose gibberish motivated me to reverse parts of code and write this.
