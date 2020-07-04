@@ -34,6 +34,9 @@ BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID)
 
 				if(configReader.ReadBoolean("MAIN", "FileDoesntSetCheatFlag", false))
 					OtherHacks::DisableCheatFlagForFile();
+
+				if (configReader.ReadBoolean("MAIN", "CorrectBaronOfHellMeleeDamage", false))
+					OtherHacks::CorrectBaronOfHellMeleeDamage();
 			}
 			else
 			{

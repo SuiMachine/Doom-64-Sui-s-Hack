@@ -4,9 +4,9 @@ A hack for DOOM 64, designed to restore **some** mouse look and various other th
 Current version notes:
 -------
 * Mouse Y axis sensitivity can be adjusted using console command: ``cl_msensitivityy``.
-* Mouse aim seems to work generally fine at the moment, but the logic for targetting is still not as it should be (not sure if this will be ever changed, mostly cause this project already ate too much of my time).
+* Mouse aim seems to work generally fine at the moment, but the logic for targetting is still not as it should be (not sure if this will be ever changed, mostly cause this project already ate too much of my time). It also doesn't affect skybox.
 
-Stuff that would be nice to fix in this crappy port:
+Stuff that would be nice to have fixed:
 -------
 * Keyboard rebinding using QWERTY layout (because why would you use the same keyboard layout for gameplay and rebinding - reported at least twice, no response from dev).
 

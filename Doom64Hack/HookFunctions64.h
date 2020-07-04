@@ -43,3 +43,14 @@ static bool NopRegion(intptr_t address, int lenght)
 	VirtualProtect((void*)address, lenght, curProtectionFlag, &temp);
 	return true;
 }
+
+static bool OverrideWithCode(intptr_t address, byte opCode[], rsize_t lenght)
+{
+	DWORD curProtectionFlag;
+	VirtualProtect((void*)address, lenght, PAGE_EXECUTE_READWRITE, &curProtectionFlag);
+	memcpy_s((void*)address, lenght, opCode, lenght);
+
+	DWORD temp;
+	VirtualProtect((void*)address, lenght, curProtectionFlag, &temp);
+	return true;
+}
