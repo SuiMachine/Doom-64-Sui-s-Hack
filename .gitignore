@@ -35,4 +35,6 @@
 Doom64Hack/.vs
 Doom64Hack/x64/*
 x64/*
+Release/7za.exe
+*.zip
 
