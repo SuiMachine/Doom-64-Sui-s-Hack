@@ -5,6 +5,5 @@ class OtherHacks
 {
 public:
 	static void DisableCheatFlagForFile();
-	static void CorrectBaronOfHellMeleeDamage();
 };
 

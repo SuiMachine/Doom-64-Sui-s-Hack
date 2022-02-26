@@ -25,18 +25,15 @@ BOOL WINAPI DllMain(HINSTANCE hInst, DWORD reason, LPVOID)
 			MODULEINFO moduleInfo;
 			GetModuleInformation(GetCurrentProcess(), baseModule, &moduleInfo, sizeof(moduleInfo));
 
-			if (moduleInfo.SizeOfImage == 8491008)
+			if (moduleInfo.SizeOfImage == 8409088)
 			{
 				CIniReader configReader("");
 
-				if (configReader.ReadBoolean("MAIN", "EnableYAxisHack", false))
-					CameraHack();
+				//if (configReader.ReadBoolean("MAIN", "EnableYAxisHack", false))
+				//	CameraHack();
 
 				if(configReader.ReadBoolean("MAIN", "FileDoesntSetCheatFlag", false))
 					OtherHacks::DisableCheatFlagForFile();
-
-				if (configReader.ReadBoolean("MAIN", "CorrectBaronOfHellMeleeDamage", false))
-					OtherHacks::CorrectBaronOfHellMeleeDamage();
 			}
 			else
 			{
