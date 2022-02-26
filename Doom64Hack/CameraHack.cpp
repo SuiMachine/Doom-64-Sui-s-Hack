@@ -1,5 +1,7 @@
 #include "CameraHack.h"
 
+#include <stdio.h>
+#include <wchar.h>
 
 typedef signed __int64(__fastcall* normalizeInputC)(float turnAmount);
 normalizeInputC normalizeInput;
@@ -16,71 +18,13 @@ unknownArrayFunctionT unknownArrayFunction;
 typedef void(__fastcall* unknownArrayFlagsFunctionT)(__int64 a1, int a2);
 unknownArrayFlagsFunctionT unknownArrayFlagsFunction;
 
-
 typedef __int64(__fastcall* unknownHandleInputFunctionT)(__int64 a1, int a2);
 unknownHandleInputFunctionT unknownHandleInputFunction;
 
+typedef char(__fastcall* unknownHandleInputFunctionF1T)(__int64 a1, int a2);
+unknownHandleInputFunctionF1T unknownHandleInputFunction2;
 
 
-/*
-This function also is used in input, but seems less so - might be something with acceleration or non-interpolated ticks?
-
-signed __int64 __fastcall handleInput1(__int64 a1, __int64 a2, unsigned __int64 a3)
-{
-	long* v3; // rbx
-	float v4; // xmm4_4
-	int v5; // eax
-	signed __int64 result; // rax
-	__int64 v9; // rdx
-	int v10; // edx
-	__int64 v11; // rdx
-
-	v3 = (long*)a1;
-	if (!(*(BYTE*)(a1 + 548) & 4))
-	{
-		*(DWORD*)(*(LONG*)a1 + 0x68i64) += 2 * *(DWORD*)(a1 + 0x14);
-		v4 = *(float*)(a1 + 0x270);
-		if (v4 != 0.0)
-		{
-			float v6 = v4;
-			float v7 = 0.0;
-
-			v5 = normalizeInput(reinterpret_cast<float*>(*(unsigned __int64*)&v4 & *(unsigned __int64*)0x140419CC0));
-			if (v6 < v7)
-				*(DWORD*)(*v3 + 0x68) += v5;       // Turn left
-			else
-				*(DWORD*)(*v3 + 0x68) -= v5;       // Turn right
-		}
-	}
-	result = *((unsigned int*)v3 + 3);
-	if ((DWORD)result && *((BYTE*)v3 + 560))
-	{
-		v9 = 2 * (signed int)result;
-		a3 = (unsigned __int64) * (unsigned int*)(*v3 + 0x68i64) >> 19;
-		*(DWORD*)(*v3 + 0x88i64) += v9 * ((DWORD*)0x1405ED8A0)[a3 + 2048] >> 16;
-		result = v9 * ((DWORD*)0x1405ED8A0)[a3] >> 16;
-		*(DWORD*)(*v3 + 140i64) += result;
-	}
-	v10 = *((DWORD*)v3 + 4);
-	if (v10 && *((BYTE*)v3 + 560))
-	{
-		v11 = 2 * v10;
-		a3 = (unsigned __int64)(unsigned int)(*(DWORD*)(*v3 + 0x68i64) - 0x40000000) >> 19;
-		*(DWORD*)(*v3 + 0x88i64) += v11 * ((DWORD*)0x1405ED8A0)[a3 + 2048] >> 16;
-		result = v11 * ((DWORD*)0x1405ED8A0)[a3] >> 16;
-		*(DWORD*)(*v3 + 0x8Ci64) += result;
-	}
-	if (*((DWORD*)v3 + 3) || *((DWORD*)v3 + 4))
-	{
-		result = (signed __int64)&*(intptr_t*)0x1403D8B30;
-		if (*(void**)(*v3 + 0xA8) == &*(intptr_t*)0x1403D8B30)
-			result = unknownFunction(*(DWORD*)v3, 2);
-	}
-	*((DWORD*)v3 + 7) &= 0xFFFFFEFF;
-	*((DWORD*)v3 + 40) = 0;
-	return result;
-}
-*/
 
 float convertValueForNormalization(float valueToConvert)
 {
@@ -94,24 +38,19 @@ float convertValueForNormalization(float valueToConvert)
 	return _mm_cvtss_f32(whateverThatIs);
 }
 
-
 void handleInput2()
 {
-	__int64 v0; // rax
-	__int64 v1; // rsi
-	__int64 v2; // rbx
-	__int64 v3; // rdi
 
 	if (!*(BYTE*)0x14073A3C4 && (unsigned __int8)unknownFunction2((__int64)0x140716FB0, 0))
 	{
 		if (*(DWORD*)0x14073A3D0 == *(DWORD*)0x140695E00)
 		{
-			v0 = unknownArrayFunction();
-			v1 = v0;
+			__int64 v0 = unknownArrayFunction();
+			__int64 v1 = v0;
 			if (!*(DWORD*)(v0 + 8))
 			{
-				v2 = v0 + 592;
-				v3 = *(ULONG*)v0;
+				__int64 v2 = v0 + 592;
+				__int64 v3 = *(ULONG*)v0;
 				if (*(ULONG*)v0)
 				{
 					unknownArrayFlagsFunction(v0 + 592, 0i64);
@@ -172,8 +111,6 @@ void handleInput2()
 
 CameraHack::CameraHack()
 {
-	//unknownFunction = (unknownFunctionC)0x14015C130;
-
 	//Used by call input functions?
 	normalizeInput = (normalizeInputC)0x000000014018E7C0;
 
@@ -183,7 +120,7 @@ CameraHack::CameraHack()
 	unknownArrayFunction = (unknownArrayFunctionT)0x140130860;
 	unknownArrayFlagsFunction = (unknownArrayFlagsFunctionT)0x1401774A0;
 	unknownHandleInputFunction = (unknownHandleInputFunctionT)0x140177930;
-
+	unknownHandleInputFunction2 = (unknownHandleInputFunctionF1T)0x14015C130;
 
 	HookJmpTrampoline(0x140130900, handleInput2, 0xE4);
 }
